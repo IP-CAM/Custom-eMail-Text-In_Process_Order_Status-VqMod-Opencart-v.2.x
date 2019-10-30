@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification
+	xmlns="https://github.com/vqmod/vqmod"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://github.com/vqmod/vqmod https://raw.githubusercontent.com/vqmod/vqmod/master/vqmod.xsd"
+	>
+	<id><![CDATA[[VQMOD] Custom email text for "In process" order status]]></id>
+	<version>0.1.0</version>
+	<vqmver>2.6.3</vqmver>
+	<author>kanenas.net (aka Nikolas Branis) - nbran@kanenas.net</author>
+	<file name="catalog/model/checkout/order.php" error="log">
+		<operation error="skip">
+			<search position="after"><![CDATA[$message .= $order_status_query->row['name'] . "\n\n";]]></search>
+			<add><![CDATA[
+					// kanenas: knns_custom_email_text_for_in_process_order_status.xml (start) <<
+					if ((int)$order_status_id === 2) {
+						$message .= $language->get('custom_text_in_order_status') . "\n\n";
+					}
+					// kanenas: knns_custom_email_text_for_in_process_order_status.xml (end) <<
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/english/mail/order.php" error="log">
+		<operation error="skip">
+			<search position="after"><![CDATA[$_['text_update_order_status']  = 'Your order has been updated to the following status:';]]></search>
+			<add><![CDATA[
+// kanenas: knns_custom_email_text_for_in_process_order_status.xml (start) <<
+$_['custom_text_in_order_status']  = 'Your order is in the collection stage. When your parcel is delivered to Geniki Taxydromiki you will receive an email with the shipping code and it will take 1-2 business days to reach its destination.';
+// kanenas: knns_custom_email_text_for_in_process_order_status.xml (end) <<
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/greek/mail/order.php" error="log">
+		<operation error="skip">
+			<search position="after"><![CDATA[$_['text_update_order_status']  = 'Η κατάσταση της παραγγελίας σας ανανεώθηκε ως εξής:';]]></search>
+			<add><![CDATA[
+// kanenas: knns_custom_email_text_for_in_process_order_status.xml (start) <<
+$_['custom_text_in_order_status']  = 'Η παραγγελία σας βρίσκεται στο στάδιο συλλογής των προϊόντων. Όταν το δέμα σας παραδοθεί στη Γενική Ταχυδρομική θα λάβετε email με τον κωδικό αποστολής και θα χρειαστούν 1-2 εργάσιμες μέρες για να φτάσει στον προορισμό του.';
+// kanenas: knns_custom_email_text_for_in_process_order_status.xml (end) <<
+			]]></add>
+		</operation>
+	</file>
+</modification>
